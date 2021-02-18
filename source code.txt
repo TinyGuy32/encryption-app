@@ -1,0 +1,167 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Main {
+
+    public static int a = 0;
+    public static char b = ' ';
+    public static JTextPane output = new JTextPane();
+
+    public static void main(String[] args) {
+        output.setEditable(false);
+        JFrame frame = new JFrame();
+        JPanel content = new JPanel(new BorderLayout());
+        JButton encrypt1 = new JButton("encrypt");
+        JButton decrypt1 = new JButton("decrypt");
+
+        encrypt1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String a = JOptionPane.showInputDialog("message:");
+                int b = Integer.parseInt(JOptionPane.showInputDialog("key:"));
+                output.setText(encrypt(a,b));
+            }
+        });
+        decrypt1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String a = JOptionPane.showInputDialog("message:");
+                int b = Integer.parseInt(JOptionPane.showInputDialog("key:"));
+                output.setText(decrypt(a,b));
+            }
+        });
+
+        frame.setPreferredSize(new Dimension(200,200));
+        frame.setContentPane(content);
+        frame.getContentPane().add(encrypt1,new BorderLayout().NORTH);
+        frame.getContentPane().add(output,new BorderLayout().CENTER);
+        frame.getContentPane().add(decrypt1,new BorderLayout().SOUTH);
+        frame.pack();
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+    public static char alphabet(int x) {
+        char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',' ','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',' ','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',' '};
+        b = alphabet[x];
+        return b;
+    }
+
+    public static int number(char x) {
+        if (x == 'a') {
+            a = 27;
+        }
+        else if (x == 'b') {
+            a = 28;
+        }
+        else if (x == 'c') {
+            a = 29;
+        }
+        else if (x == 'd') {
+            a = 30;
+        }
+        else if (x == 'e') {
+            a = 31;
+        }
+        else if (x == 'f') {
+            a = 32;
+        }
+        else if (x == 'g') {
+            a = 33;
+        }
+        else if (x == 'h') {
+            a = 34;
+        }
+        else if (x == 'i') {
+            a = 35;
+        }
+        else if (x == 'j') {
+            a = 36;
+        }
+        else if (x == 'k') {
+            a = 37;
+        }
+        else if (x == 'l') {
+            a = 38;
+        }
+        else if (x == 'm') {
+            a = 39;
+        }
+        else if (x == 'n') {
+            a = 40;
+        }
+        else if (x == 'o') {
+            a = 41;
+        }
+        else if (x == 'p') {
+            a = 42;
+        }
+        else if (x == 'q') {
+            a = 43;
+        }
+        else if (x == 'r') {
+            a = 44;
+        }
+        else if (x == 's') {
+            a = 45;
+        }
+        else if (x == 't') {
+            a = 46;
+        }
+        else if (x == 'u') {
+            a = 47;
+        }
+        else if (x == 'v') {
+            a = 48;
+        }
+        else if (x == 'w') {
+            a = 49;
+        }
+        else if (x == 'x') {
+            a = 50;
+        }
+        else if (x == 'y') {
+            a = 51;
+        }
+        else if (x == 'z') {
+            a = 52;
+        }
+        else if (x == ' ') {
+            a = 53;
+        }
+        return a;
+    }
+
+    public static String encrypt(String message, int key) {
+        char[] message1 = message.toCharArray();
+        int Length = message1.length;
+        int done1;
+        String done2 = "";
+
+        int ON = 0;
+        while (ON<Length) {
+                done1 = (number(message1[ON]) + key);
+                done2 += alphabet(done1);
+                ON += 1;
+        }
+        return done2;
+    }
+
+    public static String decrypt(String message, int key) {
+        char[] message1 = message.toCharArray();
+        int Length = message1.length;
+        int done1;
+        String done2 = "";
+
+        int ON = 0;
+        while (ON<Length) {
+                done1 = (number(message1[ON])-key);
+                done2 += alphabet(done1);
+                ON += 1;
+        }
+        return done2;
+    }
+}
